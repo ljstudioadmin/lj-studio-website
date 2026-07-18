@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="15" fill="#0b1020"/>
-  <text x="31" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="600" fill="#f6efdc">LJ</text>
-  <path d="M50 9c.7 4.4 2.9 6.6 7.3 7.3-4.4.7-6.6 2.9-7.3 7.3-.7-4.4-2.9-6.6-7.3-7.3 4.4-.7 6.6-2.9 7.3-7.3Z" fill="#c8a75a"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0b1020"/><text x="32" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="27" fill="#f5f0e7">LJ</text><path d="M46 10l1.8 4.2L52 16l-4.2 1.8L46 22l-1.8-4.2L40 16l4.2-1.8z" fill="#c8a75a"/></svg>

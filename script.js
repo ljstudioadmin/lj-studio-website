@@ -145,6 +145,9 @@ const translations = {
     "form.successTitle": "Message received.",
     "form.successCopy": "Thank you — I will personally get back to you shortly.",
     "footer.signature": "Built for clarity. Designed for growth.",
+    "legal.imprint": "Imprint",
+    "legal.privacy": "Privacy Policy",
+    "legal.cookies": "Cookie Settings",
     "carousel.slide": "Package {current} of {total}: {title}",
     "form.error": "The message could not be sent. Your email app will open instead.",
     "meta.title": "LJ Studio — Intelligent Systems",
@@ -408,7 +411,10 @@ const translations = {
     "value.impact.copy": "Weniger manuelle Arbeit. Mehr messbarer Fortschritt.",
     "contact.title": "Dein System sollte für dich arbeiten.",
     "contact.copy": "Lass uns herausfinden, welche Prozesse du vereinfachen, automatisieren und messbar verbessern kannst.",
-    "contact.note": "Die E-Mail-Adresse ist ein Platzhalter und kann direkt im HTML geändert werden."
+    "contact.note": "Die E-Mail-Adresse ist ein Platzhalter und kann direkt im HTML geändert werden.",
+    "legal.imprint": "Impressum",
+    "legal.privacy": "Datenschutzerklärung",
+    "legal.cookies": "Cookie-Einstellungen",
   }
 };
 
@@ -571,7 +577,7 @@ function formatPrice(value, currency) {
   }).format(value);
 }
 
-const priceAnimationFrames = new WeakMap();
+const priceAnimationTimers = new WeakMap();
 const reducePriceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function animatePriceValue(element, target, currency, options = {}) {
@@ -581,45 +587,27 @@ function animatePriceValue(element, target, currency, options = {}) {
   if (reducePriceMotion.matches || (!force && element.dataset.priceAnimated === "true")) {
     element.textContent = formattedTarget;
     element.dataset.currentValue = String(target);
+    element.setAttribute("aria-label", formattedTarget);
     return;
   }
 
-  const previousFrame = priceAnimationFrames.get(element);
-  if (previousFrame) cancelAnimationFrame(previousFrame);
-
-  const current = Number(element.dataset.currentValue);
-  const startValue = Number.isFinite(current)
-    ? current
-    : Math.max(0, Math.round(target * 0.72));
-
-  const distance = Math.abs(target - startValue);
-  const duration = Math.min(1050, Math.max(680, 680 + distance * 0.08));
-  const startTime = performance.now();
+  const previousTimer = priceAnimationTimers.get(element);
+  if (previousTimer) window.clearTimeout(previousTimer);
 
   element.classList.remove("price-animating");
   void element.offsetWidth;
   element.classList.add("price-animating");
+  element.textContent = formattedTarget;
+  element.dataset.currentValue = String(target);
+  element.dataset.priceAnimated = "true";
   element.setAttribute("aria-label", formattedTarget);
 
-  const tick = now => {
-    const progress = Math.min((now - startTime) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 4);
-    const value = Math.round(startValue + (target - startValue) * eased);
+  const timer = window.setTimeout(() => {
+    element.classList.remove("price-animating");
+    priceAnimationTimers.delete(element);
+  }, 620);
 
-    element.textContent = formatPrice(value, currency);
-
-    if (progress < 1) {
-      priceAnimationFrames.set(element, requestAnimationFrame(tick));
-    } else {
-      element.textContent = formattedTarget;
-      element.dataset.currentValue = String(target);
-      element.dataset.priceAnimated = "true";
-      priceAnimationFrames.delete(element);
-      window.setTimeout(() => element.classList.remove("price-animating"), 420);
-    }
-  };
-
-  priceAnimationFrames.set(element, requestAnimationFrame(tick));
+  priceAnimationTimers.set(element, timer);
 }
 
 function setCurrency(currency, animate = true) {
@@ -1063,3 +1051,47 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
     });
   });
 }
+
+
+// Placeholder only: connect this control to the selected consent-management platform before launch.
+document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
+  button.addEventListener("click", () => {
+    window.alert(document.documentElement.lang === "de"
+      ? "Die Cookie-Einstellungen werden vor dem Launch mit dem Consent-Tool verbunden."
+      : "Cookie Settings will be connected to the consent tool before launch.");
+  });
+});
+
+
+/* V14 — Polaris interactions */
+(() => {
+  const loading = document.getElementById('loading-screen');
+  const hideLoading = () => loading?.classList.add('is-hidden');
+  window.addEventListener('load', () => window.setTimeout(hideLoading, 350), { once: true });
+  window.setTimeout(hideLoading, 2200);
+
+  const ctas = {
+    en: ["Let’s build your constellation.", "Let’s connect the dots.", "Let’s build something remarkable.", "Let’s create something extraordinary.", "Let’s design your CRM."],
+    de: ["Lass uns dein System gestalten.", "Lass uns die Punkte verbinden.", "Lass uns etwas Besonderes aufbauen.", "Lass uns Klarheit schaffen.", "Lass uns dein CRM gestalten."]
+  };
+  const setDynamicCta = () => {
+    const el = document.querySelector('.dynamic-cta'); if (!el) return;
+    const lang = document.documentElement.lang === 'de' ? 'de' : 'en';
+    const options = ctas[lang];
+    el.textContent = options[Math.floor(Math.random() * options.length)];
+  };
+  setDynamicCta();
+  document.querySelectorAll('.language-button').forEach(b => b.addEventListener('click', () => setTimeout(setDynamicCta, 0)));
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hero = document.querySelector('.hero');
+  const layers = [...document.querySelectorAll('.hero-parallax')];
+  if (hero && layers.length) {
+    hero.addEventListener('pointermove', e => {
+      if (reduce.matches) return;
+      const r = hero.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      layers.forEach(layer => { const d=Number(layer.dataset.depth||.4); layer.style.transform=`translate3d(${x*18*d}px,${y*14*d}px,0)`; });
+    });
+    hero.addEventListener('pointerleave', () => layers.forEach(layer => layer.style.transform='translate3d(0,0,0)'));
+  }
+})();

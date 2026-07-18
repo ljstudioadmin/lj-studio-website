@@ -1,15 +1,18 @@
-# LJ Studio v13 — Boutique Edition
+# LJ Studio v14 — Polaris Edition
 
-Included:
+Boutique CRM and automation website with a constellation-led visual identity.
 
-- Retainers repositioned around expertise, access, and outcomes instead of hours
-- Email Support in all four retainers
-- Priority Access to Expert Support only in Business and Premium
-- Consistent US English
-- New Signature Services section for Expert Session and Strategy Session
-- Premium card with champagne-gold glow and subtle animated stars
-- No Premium badge
-- Existing back-to-top fix, package price animation, accessibility, and responsive carousel preserved
+## v14 highlights
+- ✦ LJ favicon and custom Open Graph artwork
+- Hero constellation with subtle pointer parallax
+- Random rotating premium CTA copy
+- Unified radius and signature star design system
+- Guiding Stars process: Discover, Design, Implement, Optimize
+- Founder philosophy without photography
+- Premium FAQ and certification placeholder
+- Pulsing-star loading screen and star back-to-top control
+- Boutique footer, brand closing and custom 404 page
+- US-English terminology cleanup
+- Legal placeholders remain noindex until finalized
 
-Upload the contents of this folder to the root of the existing GitHub repository and commit the changes.
-Vercel should redeploy automatically.
+Open `index.html` locally or deploy the folder as a static site.
