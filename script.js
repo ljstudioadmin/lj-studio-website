@@ -1167,26 +1167,21 @@ document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
 })();
 
 
-/* V14.9 — balanced section navigation */
+/* V14.10 — align section dividers to the very top */
 document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".site-header");
   const internalLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => {
     const href = link.getAttribute("href");
     return href && href.length > 1 && document.querySelector(href);
   });
 
-  const getSectionFocus = section =>
-    section.querySelector(".section-heading h2, .pricing-header h2, .contact-copy-panel h2, .about-panel h2, h2, h1") || section;
+  const getScrollAnchor = section => {
+    const previous = section.previousElementSibling;
+    return previous?.classList.contains("star-divider") ? previous : section;
+  };
 
-  const scrollSectionToCenter = (section, updateHash = true) => {
-    const focus = getSectionFocus(section);
-    const headerHeight = header?.getBoundingClientRect().height || 0;
-    const rect = focus.getBoundingClientRect();
-    const availableHeight = window.innerHeight - headerHeight;
-    const focusTop = window.scrollY + rect.top;
-    // Place the section heading in the upper third of the visible area.
-    // This keeps context below it without making the page feel overscrolled.
-    const targetTop = Math.max(0, focusTop - headerHeight - availableHeight * 0.22);
+  const scrollSectionToTop = (section, updateHash = true) => {
+    const anchor = getScrollAnchor(section);
+    const targetTop = Math.max(0, window.scrollY + anchor.getBoundingClientRect().top);
 
     window.scrollTo({
       top: targetTop,
@@ -1201,7 +1196,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const section = document.querySelector(link.getAttribute("href"));
       if (!section) return;
       event.preventDefault();
-      scrollSectionToCenter(section);
+      scrollSectionToTop(section);
     });
   });
 
@@ -1209,7 +1204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const initialSection = document.querySelector(location.hash);
     if (initialSection) {
       window.addEventListener("load", () => {
-        window.setTimeout(() => scrollSectionToCenter(initialSection, false), 80);
+        window.setTimeout(() => scrollSectionToTop(initialSection, false), 80);
       }, { once: true });
     }
   }

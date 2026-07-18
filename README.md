@@ -76,3 +76,8 @@ Open `index.html` locally or deploy the folder as a static site.
 - Adjusted tab navigation so section headings land in the upper third instead of the exact viewport center.
 - Prevents links from scrolling too far down while still respecting the sticky header.
 - Smooth scrolling, reduced-motion support, and hash updates remain intact.
+
+## v14.10 — Divider-top navigation
+- Internal navigation now aligns the decorative divider directly with the top edge of the viewport.
+- Sections without a preceding divider align their own section edge to the top.
+- The same positioning is applied when loading a page with a section hash.
