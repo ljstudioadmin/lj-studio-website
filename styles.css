@@ -3254,3 +3254,68 @@ h2 { font-size: clamp(1.9rem, 3.55vw, 3.45rem); }
   .about-panel { grid-template-columns: 1fr; gap: 22px; }
   .about-copy { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
 }
+
+
+/* V14.5 — cleaner hierarchy, compact principles & selected systems */
+/* Connected-systems illustration removed from the page. */
+.systems-visual-wrap { display: none !important; }
+
+/* Compact the three guiding principles beneath the hero. */
+.hero-metrics {
+  margin-top: clamp(26px, 4vw, 42px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.hero-metrics div {
+  min-height: 68px;
+  padding: 14px 18px;
+  gap: 12px;
+}
+.hero-metrics strong {
+  font-size: 1rem;
+  line-height: 1;
+}
+.hero-metrics span {
+  font-size: .78rem;
+  line-height: 1.25;
+}
+
+/* Selected Systems: shorter, cleaner and more editorial. */
+.portfolio-grid { gap: 16px; }
+.portfolio-card,
+.portfolio-card-featured {
+  min-height: 0;
+  padding: 24px 22px;
+}
+.portfolio-card-featured { grid-column: auto; }
+.portfolio-card-top { margin-bottom: 18px; }
+.portfolio-label { font-size: .68rem; }
+.portfolio-card h3 {
+  margin: 0;
+  font-size: clamp(1.12rem, 1.7vw, 1.45rem);
+  line-height: 1.18;
+}
+.portfolio-outcomes {
+  margin-top: 22px;
+  gap: 7px;
+}
+.portfolio-outcomes span {
+  padding: 7px 10px;
+  font-size: .72rem;
+}
+
+@media (max-width: 850px) {
+  .hero-metrics { grid-template-columns: repeat(3, 1fr); }
+  .hero-metrics div { border-bottom: 0; }
+  .portfolio-card,
+  .portfolio-card-featured { min-height: 0; }
+}
+
+@media (max-width: 620px) {
+  .hero-metrics { grid-template-columns: 1fr; }
+  .hero-metrics div { min-height: 54px; padding: 11px 14px; }
+  .hero-metrics div:not(:last-child) { border-bottom: 1px solid var(--line); }
+  .portfolio-card,
+  .portfolio-card-featured { padding: 20px 18px; }
+}
