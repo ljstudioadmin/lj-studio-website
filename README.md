@@ -1,19 +1,15 @@
-# LJ Studio v12 — Final Polish
+# LJ Studio v13 — Boutique Edition
 
-## Included
+Included:
 
-- More visible premium back-to-top control with subtle petrol and gold glow
-- Correct English translation: “Email sequences”
-- Decorative animated star constellation throughout the page
-- Reduced-motion alternative
-- Improved keyboard focus states
-- Translated accessibility labels
-- Semantic single-main page structure
-- Improved carousel keyboard behavior and announcements
-- Form field error messages and `aria-invalid` states
-- Improved muted-text contrast
+- Retainers repositioned around expertise, access, and outcomes instead of hours
+- Email Support in all four retainers
+- Priority Access to Expert Support only in Business and Premium
+- Consistent US English
+- New Signature Services section for Expert Session and Strategy Session
+- Premium card with champagne-gold glow and subtle animated stars
+- No Premium badge
+- Existing back-to-top fix, package price animation, accessibility, and responsive carousel preserved
 
-## Upload
-
-Upload the **contents** of this folder to the root of the existing GitHub repository,
-then commit the changes. Vercel should redeploy automatically.
+Upload the contents of this folder to the root of the existing GitHub repository and commit the changes.
+Vercel should redeploy automatically.

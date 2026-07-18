@@ -15,6 +15,42 @@ nav?.querySelectorAll('a').forEach(link => {
 
 const translations = {
   en: {
+    "signature.strategy.copy": "Executive-level consulting focused on CRM strategy, business processes, automation opportunities, and long-term growth.",
+    "signature.strategy.title": "Strategy Session",
+    "signature.expert.copy": "Personalized guidance to solve technical challenges, optimize workflows, support your team, and get the most out of your CRM.",
+    "signature.expert.title": "Expert Session",
+    "signature.copy": "Focused sessions for immediate challenges and strategic decisions—designed to make your CRM more useful, scalable, and aligned with your business.",
+    "signature.title": "Expertise, structured around the way you work.",
+    "signature.eyebrow": "SIGNATURE SERVICES",
+    "packages.retainerTailored": "Your support evolves with your systems, team, and priorities.",
+    "packages.rpremium.7": "Quarterly Strategy Planning",
+    "packages.rpremium.6": "Team Training Whenever Needed",
+    "packages.rpremium.5": "Continuous CRM Optimization",
+    "packages.rpremium.4": "Direct Access to Your CRM Specialist",
+    "packages.rpremium.3": "Dedicated CRM Partner",
+    "packages.rpremium.2": "Priority Access to Expert Support",
+    "packages.rpremium.1": "Email Support",
+    "packages.rpremium.copy": "An executive-level CRM partnership for ambitious teams that want continuous optimization and direct strategic access.",
+    "packages.rbusiness.7": "Quarterly Optimization Review",
+    "packages.rbusiness.6": "New Employee Onboarding",
+    "packages.rbusiness.5": "Automation Development",
+    "packages.rbusiness.4": "CRM Expansion",
+    "packages.rbusiness.3": "Weekly Strategy Session",
+    "packages.rbusiness.2": "Priority Access to Expert Support",
+    "packages.rbusiness.1": "Email Support",
+    "packages.rbusiness.copy": "A strategic partnership for growing teams that need ongoing system development and closer expert guidance.",
+    "packages.rgrowth.5": "Monthly Team Retraining",
+    "packages.rgrowth.4": "Dashboard Enhancements",
+    "packages.rgrowth.3": "Workflow Optimization",
+    "packages.rgrowth.2": "Two Monthly Expert Sessions",
+    "packages.rgrowth.1": "Email Support",
+    "packages.rgrowth.copy": "Ongoing CRM development for teams ready to improve workflows, reporting, and adoption month after month.",
+    "packages.care.5": "Quarterly Team Retraining",
+    "packages.care.4": "Bug Fixes",
+    "packages.care.3": "Minor CRM Improvements",
+    "packages.care.2": "Monthly Expert Session",
+    "packages.care.1": "Email Support",
+    "packages.care.copy": "Essential ongoing care for teams that want their CRM to stay reliable, useful, and well maintained.",
     "a11y.skip": "Skip to content",
     "a11y.home": "LJ Studio home",
     "a11y.navigation": "Main navigation",
@@ -155,6 +191,17 @@ const translations = {
     "contact.note": "The email address is a placeholder and can be changed directly in the HTML."
   },
   de: {
+    "signature.strategy.copy": "Strategische Beratung mit Fokus auf CRM-Strategie, Geschäftsprozesse, Automatisierungspotenziale und langfristiges Wachstum.",
+    "signature.strategy.title": "Strategy Session",
+    "signature.expert.copy": "Persönliche Beratung, um technische Herausforderungen zu lösen, Workflows zu optimieren, Ihr Team zu unterstützen und mehr aus Ihrem CRM herauszuholen.",
+    "signature.expert.title": "Expert Session",
+    "signature.copy": "Fokussierte Sessions für unmittelbare Herausforderungen und strategische Entscheidungen – damit Ihr CRM nützlicher, skalierbarer und besser auf Ihr Unternehmen abgestimmt wird.",
+    "signature.title": "Expertise, passend zu Ihrer Arbeitsweise strukturiert.",
+    "signature.eyebrow": "SIGNATURE SERVICES",
+    "packages.rpremium.7": "Quartalsweise Strategieplanung",
+    "packages.rbusiness.7": "Quartalsweiser Optimierungsreview",
+    "packages.care.5": "Quartalsweises Team Retraining",
+    "packages.care.4": "Fehlerbehebungen",
     "a11y.skip": "Direkt zum Inhalt springen",
     "a11y.home": "LJ Studio Startseite",
     "a11y.navigation": "Hauptnavigation",
@@ -182,7 +229,7 @@ const translations = {
     "packages.includes": "Enthalten",
     "packages.effort": "Typischer Zeitraum",
     "packages.tailored": "Jedes Projekt wird individuell auf dein Business zugeschnitten.",
-    "packages.retainerTailored": "Der Umfang kann mit deinen Anforderungen mitwachsen.",
+    "packages.retainerTailored": "Ihre Betreuung entwickelt sich mit Ihren Systemen, Ihrem Team und Ihren Prioritäten weiter.",
     "packages.cta": "Let’s talk",
     "packages.featured": "BELIEBTESTE OPTION",
     "packages.starter.copy": "Perfekt für Einzelunternehmer oder kleine Unternehmen, die HubSpot von Anfang an sauber aufsetzen möchten.",
@@ -224,30 +271,30 @@ const translations = {
     "packages.premium.8": "E-Mail Marketing",
     "packages.premium.9": "Conversion Optimierung",
     "packages.premium.10": "Mitarbeiterschulung",
-    "packages.care.copy": "Leichte laufende Unterstützung für kleine Änderungen und regelmäßige CRM-Pflege.",
-    "packages.care.1": "Kleine Änderungen",
-    "packages.care.2": "CRM Pflege",
-    "packages.care.3": "Bis zu 2 Stunden Support",
-    "packages.rgrowth.copy": "Für Unternehmen, die HubSpot kontinuierlich verbessern möchten, ohne intern eine eigene Operations-Rolle aufzubauen.",
-    "packages.rgrowth.1": "Workflow-Anpassungen",
-    "packages.rgrowth.2": "Newsletter",
-    "packages.rgrowth.3": "Reporting",
-    "packages.rgrowth.4": "Dashboard Updates",
-    "packages.rgrowth.5": "Bis zu 5 Stunden",
-    "packages.rbusiness.copy": "Regelmäßige strategische und operative Betreuung für wachsende Teams.",
-    "packages.rbusiness.1": "CRM Betreuung",
-    "packages.rbusiness.2": "Automationen",
-    "packages.rbusiness.3": "Reporting",
-    "packages.rbusiness.4": "Meetings",
-    "packages.rbusiness.5": "Optimierungen",
-    "packages.rbusiness.6": "Bis zu 8 Stunden",
-    "packages.rpremium.copy": "Prioritäts-Support und strategische Systementwicklung für ambitionierte Teams.",
-    "packages.rpremium.1": "Prioritäts-Support",
-    "packages.rpremium.2": "Strategie",
-    "packages.rpremium.3": "Automationen",
-    "packages.rpremium.4": "Dashboards",
-    "packages.rpremium.5": "Kampagnen",
-    "packages.rpremium.6": "Bis zu 12 Stunden",
+    "packages.care.copy": "Laufende Basisbetreuung für Teams, deren CRM zuverlässig, nützlich und sauber gepflegt bleiben soll.",
+    "packages.care.1": "Email Support",
+    "packages.care.2": "Monatliche Expert Session",
+    "packages.care.3": "Kleinere CRM-Verbesserungen",
+    "packages.rgrowth.copy": "Kontinuierliche CRM-Weiterentwicklung für Teams, die Workflows, Reporting und Nutzung Monat für Monat verbessern möchten.",
+    "packages.rgrowth.1": "Email Support",
+    "packages.rgrowth.2": "Zwei monatliche Expert Sessions",
+    "packages.rgrowth.3": "Workflow-Optimierung",
+    "packages.rgrowth.4": "Dashboard-Weiterentwicklung",
+    "packages.rgrowth.5": "Monatliches Team Retraining",
+    "packages.rbusiness.copy": "Eine strategische Partnerschaft für wachsende Teams, die laufende Systementwicklung und engere Expertenbegleitung benötigen.",
+    "packages.rbusiness.1": "Email Support",
+    "packages.rbusiness.2": "Priority Access to Expert Support",
+    "packages.rbusiness.3": "Wöchentliche Strategy Session",
+    "packages.rbusiness.4": "CRM-Ausbau",
+    "packages.rbusiness.5": "Automatisierungsentwicklung",
+    "packages.rbusiness.6": "Onboarding neuer Mitarbeitender",
+    "packages.rpremium.copy": "Eine CRM-Partnerschaft auf Executive-Level für ambitionierte Teams mit kontinuierlicher Optimierung und direktem strategischem Zugang.",
+    "packages.rpremium.1": "Email Support",
+    "packages.rpremium.2": "Priority Access to Expert Support",
+    "packages.rpremium.3": "Dedizierter CRM Partner",
+    "packages.rpremium.4": "Direkter Zugang zu Ihrer CRM-Spezialistin",
+    "packages.rpremium.5": "Kontinuierliche CRM-Optimierung",
+    "packages.rpremium.6": "Team Training nach Bedarf",
     "pricing.currencyNote": "Die EUR-Werte sind gerundete Beispiele zur Orientierung.",
     "pricing.custom.eyebrow": "AUF DICH ZUGESCHNITTEN",
     "pricing.custom.title": "Kein System sollte exakt wie das nächste aufgebaut sein.",
@@ -524,10 +571,71 @@ function formatPrice(value, currency) {
   }).format(value);
 }
 
-function setCurrency(currency) {
+const priceAnimationFrames = new WeakMap();
+const reducePriceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function animatePriceValue(element, target, currency, options = {}) {
+  const { force = false } = options;
+  const formattedTarget = formatPrice(target, currency);
+
+  if (reducePriceMotion.matches || (!force && element.dataset.priceAnimated === "true")) {
+    element.textContent = formattedTarget;
+    element.dataset.currentValue = String(target);
+    return;
+  }
+
+  const previousFrame = priceAnimationFrames.get(element);
+  if (previousFrame) cancelAnimationFrame(previousFrame);
+
+  const current = Number(element.dataset.currentValue);
+  const startValue = Number.isFinite(current)
+    ? current
+    : Math.max(0, Math.round(target * 0.72));
+
+  const distance = Math.abs(target - startValue);
+  const duration = Math.min(1050, Math.max(680, 680 + distance * 0.08));
+  const startTime = performance.now();
+
+  element.classList.remove("price-animating");
+  void element.offsetWidth;
+  element.classList.add("price-animating");
+  element.setAttribute("aria-label", formattedTarget);
+
+  const tick = now => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 4);
+    const value = Math.round(startValue + (target - startValue) * eased);
+
+    element.textContent = formatPrice(value, currency);
+
+    if (progress < 1) {
+      priceAnimationFrames.set(element, requestAnimationFrame(tick));
+    } else {
+      element.textContent = formattedTarget;
+      element.dataset.currentValue = String(target);
+      element.dataset.priceAnimated = "true";
+      priceAnimationFrames.delete(element);
+      window.setTimeout(() => element.classList.remove("price-animating"), 420);
+    }
+  };
+
+  priceAnimationFrames.set(element, requestAnimationFrame(tick));
+}
+
+function setCurrency(currency, animate = true) {
   priceValues.forEach((element) => {
     const value = Number(currency === "EUR" ? element.dataset.eur : element.dataset.usd);
-    element.textContent = formatPrice(value, currency);
+    element.dataset.priceAnimated = animate ? "false" : element.dataset.priceAnimated || "false";
+
+    const card = element.closest(".package-card");
+    const shouldAnimate = animate && (!card || card.classList.contains("is-active"));
+
+    if (shouldAnimate) animatePriceValue(element, value, currency, { force: true });
+    else {
+      element.textContent = formatPrice(value, currency);
+      element.dataset.currentValue = String(value);
+      element.setAttribute("aria-label", formatPrice(value, currency));
+    }
   });
 
   currencyButtons.forEach((button) => {
@@ -540,10 +648,37 @@ function setCurrency(currency) {
 }
 
 currencyButtons.forEach((button) => {
-  button.addEventListener("click", () => setCurrency(button.dataset.currency));
+  button.addEventListener("click", () => setCurrency(button.dataset.currency, true));
 });
 
-setCurrency(localStorage.getItem("lj-studio-currency") || "USD");
+setCurrency(localStorage.getItem("lj-studio-currency") || "USD", false);
+
+/* Animate package prices when their cards become active or enter the viewport. */
+document.querySelectorAll(".package-card").forEach(card => {
+  const price = card.querySelector(".price-value");
+  if (!price) return;
+
+  const animateCardPrice = () => {
+    if (!card.classList.contains("is-active")) return;
+    const currency = localStorage.getItem("lj-studio-currency") || "USD";
+    const target = Number(currency === "EUR" ? price.dataset.eur : price.dataset.usd);
+    price.dataset.priceAnimated = "false";
+    animatePriceValue(price, target, currency, { force: true });
+  };
+
+  const classObserver = new MutationObserver(mutations => {
+    if (mutations.some(mutation => mutation.attributeName === "class")) {
+      animateCardPrice();
+    }
+  });
+  classObserver.observe(card, { attributes: true, attributeFilter: ["class"] });
+
+  const visibilityObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    animateCardPrice();
+  }, { threshold: .58 });
+  visibilityObserver.observe(card);
+});
 
 /* LJ package carousel — V11 exact geometry */
 document.querySelectorAll(".package-carousel").forEach((carousel) => {
