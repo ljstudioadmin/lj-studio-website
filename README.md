@@ -27,10 +27,18 @@ Open `index.html` locally or deploy the folder as a static site.
 - Added compact-height laptop optimizations
 
 
-## v14.3 Compact Navigation Polish
+## v14.4 Compact Navigation Polish
 - More centered hero composition
 - Smaller global section headings
 - Shorter vertical rhythm across the site
 - Compact package carousels for laptop-height displays
 - Contact section compressed to fit common viewports
 - Complete ordered section navigation
+
+
+## v14.4 Visual Hierarchy Polish
+- Moved the connected-systems graphic below Services
+- Unified and reduced section headings
+- Simplified founder philosophy layout
+- Removed decorative card numbering
+- Added a warmer contact-form CTA

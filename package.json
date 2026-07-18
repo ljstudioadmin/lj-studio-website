@@ -1,6 +1,6 @@
 {
   "name": "lj-studio-website",
-  "version": "14.1.0",
+  "version": "14.4.0",
   "private": true,
   "scripts": {
     "dev": "npx serve .",
