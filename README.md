@@ -1,3 +1,21 @@
+# LJ Studio v11.1 — Flat Vercel Fix
+
+The three critical website files now sit directly in the repository root:
+
+- `index.html`
+- `styles.css`
+- `script.js`
+
+This prevents a missing `assets/css` folder from producing an unstyled text page.
+
+## Replace the current GitHub files
+
+Upload **all files from this package** to the root of the same repository.
+When GitHub asks, choose **Commit changes**.
+
+Vercel will redeploy automatically. If it does not, open the project in
+Vercel and select **Deployments → Redeploy**.
+
 # LJ Studio Website — Version 11
 
 Production-ready static website for GitHub and Vercel.
