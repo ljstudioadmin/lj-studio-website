@@ -3319,3 +3319,21 @@ h2 { font-size: clamp(1.9rem, 3.55vw, 3.45rem); }
   .portfolio-card,
   .portfolio-card-featured { padding: 20px 18px; }
 }
+
+
+/* v14.6 — single-line custom statement + mouse-drag carousels */
+@media (min-width: 901px) {
+  .custom-scope h3 {
+    font-size: clamp(1.35rem, 1.85vw, 1.9rem);
+    white-space: nowrap;
+  }
+}
+.carousel-viewport {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.package-carousel.is-dragging .carousel-viewport { cursor: grabbing; }
+.package-carousel.is-dragging .carousel-track { transition: none !important; }
+.package-carousel.is-dragging .package-card { pointer-events: none; }

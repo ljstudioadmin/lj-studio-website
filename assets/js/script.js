@@ -680,6 +680,12 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
   let activeIndex = window.innerWidth < 720 ? 0 : Math.min(1, cards.length - 1);
   let touchStartX = 0;
   let resizeFrame = null;
+  let dragStartX = 0;
+  let dragDeltaX = 0;
+  let baseTranslate = 0;
+  let isDragging = false;
+  let didDrag = false;
+  let activePointerId = null;
 
   const clampIndex = (index) => (index + cards.length) % cards.length;
 
@@ -705,8 +711,9 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
       ? 0
       : (viewportWidth - activeCard.getBoundingClientRect().width) / 2;
     const translate = centerOffset - activeCard.offsetLeft;
+    baseTranslate = Math.round(translate);
 
-    track.style.transform = `translate3d(${Math.round(translate)}px, 0, 0)`;
+    track.style.transform = `translate3d(${baseTranslate}px, 0, 0)`;
 
     cards.forEach((card, index) => {
       const distance = Math.abs(index - activeIndex);
@@ -731,10 +738,61 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
 
   cards.forEach((card, index) => {
     card.addEventListener("click", (event) => {
+      if (didDrag) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
       if (event.target.closest("a, button")) return;
       activeIndex = index;
       updateCarousel();
     });
+  });
+
+
+  // Desktop + pen drag interaction: click, hold and pull the carousel.
+  viewport?.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (event.target.closest("a, button")) return;
+    activePointerId = event.pointerId;
+    dragStartX = event.clientX;
+    dragDeltaX = 0;
+    isDragging = true;
+    didDrag = false;
+    viewport.setPointerCapture?.(event.pointerId);
+    carousel.classList.add("is-dragging");
+    track.style.transition = "none";
+  });
+
+  viewport?.addEventListener("pointermove", (event) => {
+    if (!isDragging || event.pointerId !== activePointerId) return;
+    dragDeltaX = event.clientX - dragStartX;
+    if (Math.abs(dragDeltaX) > 5) didDrag = true;
+    track.style.transform = `translate3d(${baseTranslate + dragDeltaX}px, 0, 0)`;
+  });
+
+  const finishDrag = (event) => {
+    if (!isDragging || event.pointerId !== activePointerId) return;
+    isDragging = false;
+    carousel.classList.remove("is-dragging");
+    viewport.releasePointerCapture?.(event.pointerId);
+    track.style.transition = "";
+
+    if (Math.abs(dragDeltaX) > 55) {
+      move(dragDeltaX > 0 ? -1 : 1);
+    } else {
+      updateCarousel();
+    }
+
+    activePointerId = null;
+    dragDeltaX = 0;
+    window.setTimeout(() => { didDrag = false; }, 0);
+  };
+
+  viewport?.addEventListener("pointerup", finishDrag);
+  viewport?.addEventListener("pointercancel", finishDrag);
+  viewport?.addEventListener("lostpointercapture", (event) => {
+    if (isDragging && event.pointerId === activePointerId) finishDrag(event);
   });
 
   carousel.addEventListener("keydown", (event) => {

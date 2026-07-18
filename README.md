@@ -27,7 +27,7 @@ Open `index.html` locally or deploy the folder as a static site.
 - Added compact-height laptop optimizations
 
 
-## v14.5 Compact Navigation Polish
+## v14.6 Compact Navigation Polish
 - More centered hero composition
 - Smaller global section headings
 - Shorter vertical rhythm across the site
@@ -36,7 +36,7 @@ Open `index.html` locally or deploy the folder as a static site.
 - Complete ordered section navigation
 
 
-## v14.5 Visual Hierarchy Polish
+## v14.6 Visual Hierarchy Polish
 - Moved the connected-systems graphic below Services
 - Unified and reduced section headings
 - Simplified founder philosophy layout
@@ -44,8 +44,13 @@ Open `index.html` locally or deploy the folder as a static site.
 - Added a warmer contact-form CTA
 
 
-## v14.5
+## v14.6
 - Removed the connected-systems illustration
 - Removed the decorative star from the contact submit copy
 - Compacted the three hero principles
 - Simplified Selected Systems cards with less copy
+
+
+## v14.6
+- Custom-scope headline kept on one line on desktop.
+- Package carousels support click-and-drag interaction with mouse and pen.
