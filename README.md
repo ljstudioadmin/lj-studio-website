@@ -1,4 +1,4 @@
-# LJ Studio v14.1 — Polaris Edition
+# LJ Studio v14.2 — Polaris Edition
 
 Boutique CRM and automation website with a constellation-led visual identity.
 
@@ -16,3 +16,12 @@ Boutique CRM and automation website with a constellation-led visual identity.
 - Legal placeholders remain noindex until finalized
 
 Open `index.html` locally or deploy the folder as a static site.
+
+
+## v14.2 Responsive & Structure Polish
+- Reduced oversized typography and vertical spacing across screen sizes
+- Improved fixed-navigation anchor offsets
+- Moved Packages before Method and Portfolio
+- Moved Certifications directly below Portfolio
+- Reorganized footer into clear brand, message, links, and legal groups
+- Added compact-height laptop optimizations
