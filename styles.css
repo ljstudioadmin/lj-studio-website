@@ -2825,3 +2825,40 @@ main,
 .error-page .error-constellation{position:relative;width:180px;height:90px;margin:0 auto 2rem}.error-page .error-constellation span{position:absolute;color:var(--gold)}.error-page .error-constellation span:nth-child(1){left:5%;top:55%}.error-page .error-constellation span:nth-child(2){left:45%;top:5%;font-size:1.4rem}.error-page .error-constellation span:nth-child(3){right:4%;top:60%}.error-page .error-constellation::before,.error-page .error-constellation::after{content:"";position:absolute;top:50%;width:48%;height:1px;background:rgba(200,167,90,.35)}.error-page .error-constellation::before{left:7%;transform:rotate(-25deg)}.error-page .error-constellation::after{right:5%;transform:rotate(25deg)}
 @media(max-width:700px){.certification-placeholder{align-items:flex-start;flex-wrap:wrap}.certification-placeholder small{width:100%;padding-left:2.65rem}.hero-orbit-line{display:none}}
 @media(prefers-reduced-motion:reduce){.loading-mark span{animation:none}.hero-parallax{transform:none!important}}
+
+/* v14.1: clearer contact form labels */
+.contact-form .form-field {
+  padding-top: 0;
+}
+
+.contact-form .form-field label {
+  position: static;
+  display: block;
+  margin: 0 0 8px;
+  color: rgba(245, 242, 234, .88);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  pointer-events: auto;
+  transform: none;
+}
+
+.contact-form .form-field:focus-within label,
+.contact-form .form-field.has-value label,
+.contact-form .form-field:has(select) label {
+  color: #c8a75a;
+  transform: none;
+}
+
+.contact-form .form-field input,
+.contact-form .form-field textarea,
+.contact-form .form-field select {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.contact-form .form-field textarea {
+  padding-top: 14px;
+}

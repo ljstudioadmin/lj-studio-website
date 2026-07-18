@@ -1,4 +1,4 @@
-# LJ Studio v14 — Polaris Edition
+# LJ Studio v14.1 — Polaris Edition
 
 Boutique CRM and automation website with a constellation-led visual identity.
 

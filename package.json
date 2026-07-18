@@ -1,10 +1,10 @@
 {
   "name": "lj-studio-website",
-  "version": "14.0.0",
+  "version": "14.1.0",
   "private": true,
   "scripts": {
     "dev": "npx serve .",
     "preview": "npx serve ."
   },
-  "description": "LJ Studio v14 Polaris Edition"
+  "description": "LJ Studio v14.1 Polaris Edition"
 }
