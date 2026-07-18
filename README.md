@@ -60,3 +60,12 @@ Open `index.html` locally or deploy the folder as a static site.
 - Removed package card corner numbers.
 - Restored reliable previous/next arrow clicks alongside mouse drag.
 - Increased the drag activation threshold so ordinary clicks remain clicks.
+
+
+## v14.8 — Final Contact & Navigation Polish
+
+- Contact headline reduced and balanced to approximately two lines.
+- Form CTA refined to “Let’s start the conversation” / “Lass uns ins Gespräch kommen”.
+- Navigation tabs now scroll each section heading into the visual center of the available viewport.
+- Sticky-header height and reduced-motion preferences are respected.
+- Active navigation behavior remains intact.

@@ -3343,3 +3343,25 @@ h2 { font-size: clamp(1.9rem, 3.55vw, 3.45rem); }
 .package-topline { justify-content: flex-start; }
 .carousel-controls { position: relative; z-index: 8; }
 .carousel-arrow { position: relative; z-index: 9; pointer-events: auto; }
+
+
+/* v14.8 — calmer contact statement + centered tab destinations */
+.contact-copy-panel h2 {
+  font-size: clamp(1.72rem, 2.75vw, 2.6rem);
+  line-height: 1.08;
+  max-width: 430px;
+  text-wrap: balance;
+}
+
+@media (min-width: 851px) {
+  .contact-copy-panel h2 { max-width: 16.5ch; }
+}
+
+@media (max-width: 850px) {
+  .contact-copy-panel h2 {
+    max-width: 18ch;
+    font-size: clamp(1.75rem, 6vw, 2.35rem);
+  }
+}
+
+section[id] { scroll-margin-top: 0; }

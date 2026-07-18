@@ -137,7 +137,7 @@ const translations = {
     "form.message": "Tell me about your project",
     "form.messagePlaceholder": "What are you trying to improve, and what is currently getting in the way?",
     "form.consent": "I agree that LJ Studio may use my details to respond to this inquiry.",
-    "form.submit": "Send it my way",
+    "form.submit": "Let’s start the conversation",
     "form.note": "The form is ready for Formspree. Until an endpoint is added, it opens your email app with the message prefilled.",
     "form.invalid": "Please complete the required fields and enter a valid email address.",
     "form.sending": "Sending your message…",
@@ -364,7 +364,7 @@ const translations = {
     "form.message": "Erzähl mir von deinem Projekt",
     "form.messagePlaceholder": "Was möchtest du verbessern und was steht aktuell im Weg?",
     "form.consent": "Ich stimme zu, dass LJ Studio meine Angaben zur Beantwortung dieser Anfrage verwenden darf.",
-    "form.submit": "Schick es mir",
+    "form.submit": "Lass uns ins Gespräch kommen",
     "form.note": "Das Formular ist für Formspree vorbereitet. Bis ein Endpoint hinterlegt ist, öffnet es dein E-Mail-Programm mit der vorausgefüllten Nachricht.",
     "form.invalid": "Bitte fülle die Pflichtfelder aus und gib eine gültige E-Mail-Adresse ein.",
     "form.sending": "Nachricht wird gesendet…",
@@ -1165,3 +1165,50 @@ document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
     hero.addEventListener('pointerleave', () => layers.forEach(layer => layer.style.transform='translate3d(0,0,0)'));
   }
 })();
+
+
+/* V14.8 — centered section navigation */
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".site-header");
+  const internalLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => {
+    const href = link.getAttribute("href");
+    return href && href.length > 1 && document.querySelector(href);
+  });
+
+  const getSectionFocus = section =>
+    section.querySelector(".section-heading h2, .pricing-header h2, .contact-copy-panel h2, .about-panel h2, h2, h1") || section;
+
+  const scrollSectionToCenter = (section, updateHash = true) => {
+    const focus = getSectionFocus(section);
+    const headerHeight = header?.getBoundingClientRect().height || 0;
+    const rect = focus.getBoundingClientRect();
+    const availableHeight = window.innerHeight - headerHeight;
+    const focusCenter = window.scrollY + rect.top + rect.height / 2;
+    const targetTop = Math.max(0, focusCenter - headerHeight - availableHeight / 2);
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    });
+
+    if (updateHash) history.replaceState(null, "", `#${section.id}`);
+  };
+
+  internalLinks.forEach(link => {
+    link.addEventListener("click", event => {
+      const section = document.querySelector(link.getAttribute("href"));
+      if (!section) return;
+      event.preventDefault();
+      scrollSectionToCenter(section);
+    });
+  });
+
+  if (location.hash) {
+    const initialSection = document.querySelector(location.hash);
+    if (initialSection) {
+      window.addEventListener("load", () => {
+        window.setTimeout(() => scrollSectionToCenter(initialSection, false), 80);
+      }, { once: true });
+    }
+  }
+});
