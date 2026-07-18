@@ -3337,3 +3337,9 @@ h2 { font-size: clamp(1.9rem, 3.55vw, 3.45rem); }
 .package-carousel.is-dragging .carousel-viewport { cursor: grabbing; }
 .package-carousel.is-dragging .carousel-track { transition: none !important; }
 .package-carousel.is-dragging .package-card { pointer-events: none; }
+
+
+/* v14.7 — number-free package cards + reliable click controls */
+.package-topline { justify-content: flex-start; }
+.carousel-controls { position: relative; z-index: 8; }
+.carousel-arrow { position: relative; z-index: 9; pointer-events: auto; }

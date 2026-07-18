@@ -733,8 +733,20 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
     updateCarousel();
   }
 
-  previousButton?.addEventListener("click", () => move(-1));
-  nextButton?.addEventListener("click", () => move(1));
+  // Keep the arrow controls fully clickable even with drag support enabled.
+  [previousButton, nextButton].forEach((button) => {
+    button?.addEventListener("pointerdown", (event) => event.stopPropagation());
+  });
+  previousButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    move(-1);
+  });
+  nextButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    move(1);
+  });
 
   cards.forEach((card, index) => {
     card.addEventListener("click", (event) => {
@@ -767,7 +779,7 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
   viewport?.addEventListener("pointermove", (event) => {
     if (!isDragging || event.pointerId !== activePointerId) return;
     dragDeltaX = event.clientX - dragStartX;
-    if (Math.abs(dragDeltaX) > 5) didDrag = true;
+    if (Math.abs(dragDeltaX) > 12) didDrag = true;
     track.style.transform = `translate3d(${baseTranslate + dragDeltaX}px, 0, 0)`;
   });
 
@@ -778,7 +790,7 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
     viewport.releasePointerCapture?.(event.pointerId);
     track.style.transition = "";
 
-    if (Math.abs(dragDeltaX) > 55) {
+    if (Math.abs(dragDeltaX) > 60) {
       move(dragDeltaX > 0 ? -1 : 1);
     } else {
       updateCarousel();
