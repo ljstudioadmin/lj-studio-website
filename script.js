@@ -1167,7 +1167,7 @@ document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
 })();
 
 
-/* V14.8 — centered section navigation */
+/* V14.9 — balanced section navigation */
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
   const internalLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => {
@@ -1183,8 +1183,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const headerHeight = header?.getBoundingClientRect().height || 0;
     const rect = focus.getBoundingClientRect();
     const availableHeight = window.innerHeight - headerHeight;
-    const focusCenter = window.scrollY + rect.top + rect.height / 2;
-    const targetTop = Math.max(0, focusCenter - headerHeight - availableHeight / 2);
+    const focusTop = window.scrollY + rect.top;
+    // Place the section heading in the upper third of the visible area.
+    // This keeps context below it without making the page feel overscrolled.
+    const targetTop = Math.max(0, focusTop - headerHeight - availableHeight * 0.22);
 
     window.scrollTo({
       top: targetTop,

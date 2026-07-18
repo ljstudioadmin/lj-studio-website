@@ -69,3 +69,10 @@ Open `index.html` locally or deploy the folder as a static site.
 - Navigation tabs now scroll each section heading into the visual center of the available viewport.
 - Sticky-header height and reduced-motion preferences are respected.
 - Active navigation behavior remains intact.
+
+
+## v14.9 — Balanced Navigation Offset
+
+- Adjusted tab navigation so section headings land in the upper third instead of the exact viewport center.
+- Prevents links from scrolling too far down while still respecting the sticky header.
+- Smooth scrolling, reduced-motion support, and hash updates remain intact.
