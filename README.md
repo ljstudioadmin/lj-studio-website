@@ -1,91 +1,19 @@
-# LJ Studio v11.1 — Flat Vercel Fix
-
-The three critical website files now sit directly in the repository root:
-
-- `index.html`
-- `styles.css`
-- `script.js`
-
-This prevents a missing `assets/css` folder from producing an unstyled text page.
-
-## Replace the current GitHub files
-
-Upload **all files from this package** to the root of the same repository.
-When GitHub asks, choose **Commit changes**.
-
-Vercel will redeploy automatically. If it does not, open the project in
-Vercel and select **Deployments → Redeploy**.
-
-# LJ Studio Website — Version 11
-
-Production-ready static website for GitHub and Vercel.
-
-## Deploy with GitHub + Vercel
-
-1. Create a new empty GitHub repository, for example `lj-studio-website`.
-2. Upload the complete contents of this folder to the repository root.
-3. Sign in to Vercel and choose **Add New → Project**.
-4. Import the GitHub repository.
-5. Keep **Framework Preset: Other** and leave the build command empty.
-6. Click **Deploy**.
-7. In Vercel, open **Settings → Domains** and add `ljstudio.de`.
-
-Vercel will automatically publish every future GitHub update.
-
-## Local preview
-
-Double-clicking `index.html` may restrict some browser features. A local server is better:
-
-```bash
-npm run dev
-```
-
-Then open the address printed in the terminal.
-
-## Before launch
-
-Replace these placeholders in `index.html`:
-
-- `https://www.linkedin.com/in/REPLACE-ME/`
-- `https://www.fiverr.com/REPLACE-ME`
-
-Confirm these values:
-
-- Canonical domain: `https://ljstudio.de/`
-- Contact email: `lj@ljstudio.de`
-- Contact form endpoint/configuration in `assets/js/script.js`
+# LJ Studio v12 — Final Polish
 
 ## Included
 
-- Fully responsive mobile carousel with exact rendered offsets
-- English/German language switch
-- USD/EUR pricing
-- SEO and Open Graph metadata
-- Schema.org structured data
-- Favicon, Apple Touch Icon and PWA icons
-- `robots.txt` and `sitemap.xml`
-- `manifest.webmanifest`
-- Lightweight offline service worker
-- Branded 404 page
-- Security and caching headers for Vercel
-- Reduced-motion and keyboard-accessibility support
+- More visible premium back-to-top control with subtle petrol and gold glow
+- Correct English translation: “Email sequences”
+- Decorative animated star constellation throughout the page
+- Reduced-motion alternative
+- Improved keyboard focus states
+- Translated accessibility labels
+- Semantic single-main page structure
+- Improved carousel keyboard behavior and announcements
+- Form field error messages and `aria-invalid` states
+- Improved muted-text contrast
 
-## Structure
+## Upload
 
-```text
-/
-├── index.html
-├── 404.html
-├── assets/
-│   ├── css/styles.css
-│   ├── js/script.js
-│   ├── icons/
-│   └── images/og-cover.png
-├── manifest.webmanifest
-├── service-worker.js
-├── robots.txt
-├── sitemap.xml
-├── vercel.json
-├── package.json
-└── README.md
-```
+Upload the **contents** of this folder to the root of the existing GitHub repository,
+then commit the changes. Vercel should redeploy automatically.

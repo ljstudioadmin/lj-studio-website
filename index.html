@@ -55,8 +55,8 @@
   }
   </script>
 </head>
-<body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
+<body id="top">
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skip">Skip to content</a>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
   <div class="brand-stars" aria-hidden="true">
@@ -65,8 +65,20 @@
     <span class="background-star star-three">✦</span>
   </div>
 
+
+  <div class="page-constellation" aria-hidden="true">
+    <span class="page-star page-star-1">✦</span>
+    <span class="page-star page-star-2">✧</span>
+    <span class="page-star page-star-3">·</span>
+    <span class="page-star page-star-4">✦</span>
+    <span class="page-star page-star-5">✧</span>
+    <span class="page-star page-star-6">✦</span>
+    <span class="page-star page-star-7">·</span>
+    <span class="page-star page-star-8">✧</span>
+  </div>
+
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="LJ Studio Startseite">
+    <a class="brand" href="#top" aria-label="LJ Studio home" data-i18n-aria-label="a11y.home">
       <span class="brand-mark">LJ<span class="spark">✦</span></span>
       <span class="brand-word">STUDIO</span>
     </a>
@@ -76,7 +88,7 @@
       <span class="sr-only" data-i18n="nav.menu">Open menu</span>
     </button>
 
-    <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+    <nav id="main-nav" class="main-nav" aria-label="Main navigation" data-i18n-aria-label="a11y.navigation">
       <span class="nav-active-indicator" aria-hidden="true"></span>
       <a href="#services" data-i18n="nav.services">Services</a>
       <a href="#packages" data-i18n="nav.packages">Packages</a>
@@ -85,15 +97,14 @@
       <a href="#about" data-i18n="nav.studio">Studio</a>
       <a href="#contact" class="nav-cta star-cta" data-i18n="nav.call">Let’s talk</a>
 
-      <div class="language-switcher" role="group" aria-label="Language">
+      <div class="language-switcher" role="group" aria-label="Language" data-i18n-aria-label="a11y.language">
         <button type="button" class="language-button active" data-language="en" aria-pressed="true">EN</button>
         <button type="button" class="language-button" data-language="de" aria-pressed="false">DE</button>
       </div>
     </nav>
   </header>
 
-  <main id="top">
-    <main id="main-content">
+  <main id="main-content">
   <section class="hero section">
       <div class="hero-light" aria-hidden="true"></div>
       <div class="hero-signature-star" aria-hidden="true">
@@ -151,7 +162,7 @@
         <div><strong data-count-to="3" data-count-pad="2">03</strong><span data-i18n="metrics.measurable">Measurable systems</span></div>
       </div>
 
-      <a class="star-scroll reveal" href="#services" aria-label="Scroll to services">
+      <a class="star-scroll reveal" href="#services" aria-label="Scroll to services" data-i18n-aria-label="a11y.scrollServices">
         <span>✦</span>
       </a>
     </section>
@@ -182,7 +193,7 @@
           <ul>
             <li>Workflow Design</li>
             <li>Lead Scoring</li>
-            <li>E-Mail-Sequenzen</li>
+            <li data-i18n="service.automation.sequence">Email sequences</li>
           </ul>
         </article>
 
@@ -312,7 +323,7 @@
         <p class="currency-note" data-i18n="pricing.currencyNote">EUR values are rounded examples for orientation.</p>
       </div>
 
-      <div class="package-carousel reveal" data-carousel="projects" tabindex="0" aria-label="Project packages">
+      <div class="package-carousel reveal" data-carousel="projects" tabindex="0" aria-label="Project packages" data-i18n-aria-label="a11y.projectPackages">
         <p class="carousel-live sr-only" aria-live="polite"></p>
         <div class="carousel-toolbar">
           <div>
@@ -320,9 +331,9 @@
             <h3 data-i18n="packages.projectTitle">One-time builds</h3>
           </div>
           <div class="carousel-controls">
-            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous package">←</button>
+            <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous package" data-i18n-aria-label="a11y.previousPackage">←</button>
             <div class="carousel-progress" aria-hidden="true"><span></span><i>✦</i></div>
-            <button class="carousel-arrow carousel-next" type="button" aria-label="Next package">→</button>
+            <button class="carousel-arrow carousel-next" type="button" aria-label="Next package" data-i18n-aria-label="a11y.nextPackage">→</button>
           </div>
         </div>
 
@@ -657,12 +668,12 @@
           <div class="form-row">
             <div class="form-field">
               <label for="name" data-i18n="form.name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required data-i18n-placeholder="form.namePlaceholder" placeholder=" ">
-            </div>
+              <input id="name" name="name" type="text" aria-describedby="name-error" autocomplete="name" required data-i18n-placeholder="form.namePlaceholder" placeholder=" ">
+            <span class="field-error" id="name-error" aria-live="polite"></span></div>
             <div class="form-field">
               <label for="email" data-i18n="form.email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required data-i18n-placeholder="form.emailPlaceholder" placeholder=" ">
-            </div>
+              <input id="email" name="email" type="email" aria-describedby="email-error" autocomplete="email" required data-i18n-placeholder="form.emailPlaceholder" placeholder=" ">
+            <span class="field-error" id="email-error" aria-live="polite"></span></div>
           </div>
 
           <div class="form-field">
@@ -694,7 +705,7 @@
 
           <div class="form-field">
             <label for="message" data-i18n="form.message">Tell me about your project</label>
-            <textarea id="message" name="message" rows="6" required data-i18n-placeholder="form.messagePlaceholder" placeholder=" "></textarea>
+            <textarea id="message" name="message" rows="6" aria-describedby="message-error" required data-i18n-placeholder="form.messagePlaceholder" placeholder=" "></textarea><span class="field-error" id="message-error" aria-live="polite"></span>
           </div>
 
           <div class="form-consent">
@@ -719,8 +730,6 @@
     </section>
   </main>
 
-    </main>
-
   <footer class="site-footer">
     <div class="footer-monogram" aria-hidden="true">LJ</div>
     <div class="footer-signature" aria-hidden="true">✦</div>
@@ -744,7 +753,7 @@
     <p>© <span id="year"></span> LJ Studio</p>
   </footer>
 
-  <button class="back-to-top" type="button" aria-label="Back to top">
+  <button class="back-to-top" type="button" aria-label="Back to top" data-i18n-aria-label="a11y.backToTop">
     <span class="back-to-top-star" aria-hidden="true">✦</span>
     <span class="back-to-top-arrow" aria-hidden="true">↑</span>
   </button>

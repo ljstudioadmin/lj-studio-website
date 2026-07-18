@@ -2087,3 +2087,186 @@ button,
 .error-page h1 { margin: 0; }
 .error-page p { margin: 0 auto 12px; }
 .error-page .button { justify-self: center; }
+
+
+/* =========================================================
+   V12 — Final polish: constellation, visibility and accessibility
+   ========================================================= */
+
+.page-constellation {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  min-height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.site-header,
+main,
+.site-footer,
+.back-to-top {
+  position: relative;
+  z-index: 1;
+}
+
+.page-star {
+  --scroll-shift: 0px;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  color: rgba(200, 167, 90, .72);
+  text-shadow:
+    0 0 10px rgba(200, 167, 90, .34),
+    0 0 26px rgba(15, 118, 110, .26);
+  transform: translate3d(0, var(--scroll-shift), 0);
+  animation: constellation-breathe 7s ease-in-out infinite alternate,
+             constellation-turn 18s linear infinite;
+  will-change: transform, opacity;
+}
+
+.page-star-1 { top: 14%; left: 5%; font-size: 1rem; animation-delay: -1s; }
+.page-star-2 { top: 25%; right: 8%; font-size: 1.3rem; color: rgba(89, 184, 173, .62); animation-delay: -4s; }
+.page-star-3 { top: 37%; left: 12%; font-size: 1.7rem; opacity: .55; animation-delay: -2s; }
+.page-star-4 { top: 48%; right: 5%; font-size: .82rem; animation-delay: -6s; }
+.page-star-5 { top: 60%; left: 7%; font-size: 1.1rem; color: rgba(89, 184, 173, .56); animation-delay: -3s; }
+.page-star-6 { top: 72%; right: 10%; font-size: .92rem; animation-delay: -8s; }
+.page-star-7 { top: 84%; left: 16%; font-size: 1.8rem; opacity: .42; animation-delay: -5s; }
+.page-star-8 { top: 94%; right: 6%; font-size: 1.2rem; color: rgba(89, 184, 173, .52); animation-delay: -7s; }
+
+@keyframes constellation-breathe {
+  0% { opacity: .34; filter: blur(.1px); }
+  100% { opacity: .92; filter: blur(0); }
+}
+
+@keyframes constellation-turn {
+  from { rotate: -6deg; }
+  to { rotate: 354deg; }
+}
+
+/* More visible while retaining the quiet premium character. */
+.back-to-top {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(89, 184, 173, .5);
+  background:
+    radial-gradient(circle at 42% 35%, rgba(89, 184, 173, .18), transparent 58%),
+    rgba(9, 21, 34, .86);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, .28),
+    0 0 0 1px rgba(89, 184, 173, .08) inset,
+    0 0 22px rgba(15, 118, 110, .22);
+  backdrop-filter: blur(16px);
+}
+
+.back-to-top.is-visible {
+  opacity: .94;
+}
+
+.back-to-top-star {
+  font-size: .86rem;
+  opacity: .9;
+  color: #76c9c0;
+  text-shadow: 0 0 12px rgba(89, 184, 173, .72);
+}
+
+.back-to-top-arrow {
+  font-size: 1.16rem;
+  color: #f6efdc;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  border-color: rgba(200, 167, 90, .86);
+  background:
+    radial-gradient(circle at 42% 35%, rgba(200, 167, 90, .24), transparent 60%),
+    rgba(9, 21, 34, .94);
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, .32),
+    0 0 0 1px rgba(200, 167, 90, .15) inset,
+    0 0 28px rgba(200, 167, 90, .38);
+}
+
+.back-to-top:hover .back-to-top-star,
+.back-to-top:focus-visible .back-to-top-star {
+  color: #e0c47d;
+  text-shadow: 0 0 15px rgba(200, 167, 90, .9);
+}
+
+/* One calm attention cue when the button first enters. */
+.back-to-top.is-visible:not(.has-pulsed) {
+  animation: back-to-top-arrival 1.15s cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes back-to-top-arrival {
+  0% { scale: .78; box-shadow: 0 0 0 rgba(89, 184, 173, 0); }
+  55% { scale: 1.06; box-shadow: 0 0 34px rgba(89, 184, 173, .42); }
+  100% { scale: 1; }
+}
+
+/* Premium focus treatment with strong keyboard visibility. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #d7ba70;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 5px rgba(200, 167, 90, .14);
+}
+
+.language-button:focus-visible,
+.carousel-arrow:focus-visible,
+.currency-button:focus-visible {
+  outline-offset: 3px;
+}
+
+.field-error {
+  display: block;
+  min-height: 1.1em;
+  margin-top: 7px;
+  color: #f0adad;
+  font-size: .76rem;
+  line-height: 1.35;
+}
+
+.form-field input[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"],
+.form-field select[aria-invalid="true"] {
+  border-color: rgba(240, 173, 173, .8);
+}
+
+.form-consent input[aria-invalid="true"] {
+  outline: 2px solid #f0adad;
+  outline-offset: 3px;
+}
+
+/* Ensure muted copy remains readable without visually changing the palette. */
+.service-card p,
+.section-heading p,
+.package-card p,
+.contact-copy p,
+.site-footer p,
+.form-note,
+.contact-form small {
+  color: rgba(246, 239, 220, .76);
+}
+
+@media (max-width: 720px) {
+  .page-star-1, .page-star-3, .page-star-6, .page-star-8 { display: none; }
+  .page-star-2 { right: 3%; }
+  .page-star-4 { right: 2%; }
+  .page-star-5 { left: 2%; }
+  .page-star-7 { left: 5%; }
+  .back-to-top { width: 50px; height: 50px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-star {
+    animation: none;
+    transform: none !important;
+  }
+  .back-to-top.is-visible:not(.has-pulsed) {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

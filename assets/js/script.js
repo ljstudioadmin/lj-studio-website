@@ -15,6 +15,19 @@ nav?.querySelectorAll('a').forEach(link => {
 
 const translations = {
   en: {
+    "a11y.skip": "Skip to content",
+    "a11y.home": "LJ Studio home",
+    "a11y.navigation": "Main navigation",
+    "a11y.language": "Language",
+    "a11y.scrollServices": "Scroll to services",
+    "a11y.projectPackages": "Project packages",
+    "a11y.retainers": "Monthly retainers",
+    "a11y.previousPackage": "Previous package",
+    "a11y.nextPackage": "Next package",
+    "a11y.backToTop": "Back to top",
+    "a11y.required": "This field is required.",
+    "a11y.invalidEmail": "Please enter a valid email address.",
+    "service.automation.sequence": "Email sequences",
     "packages.hoursExpiry": "Unused hours expire at the end of each billing month and do not roll over.",
     "packages.timeline.premium": "6–8 weeks",
     "packages.timeline.business": "4–6 weeks",
@@ -142,6 +155,19 @@ const translations = {
     "contact.note": "The email address is a placeholder and can be changed directly in the HTML."
   },
   de: {
+    "a11y.skip": "Direkt zum Inhalt springen",
+    "a11y.home": "LJ Studio Startseite",
+    "a11y.navigation": "Hauptnavigation",
+    "a11y.language": "Sprache",
+    "a11y.scrollServices": "Zu den Leistungen scrollen",
+    "a11y.projectPackages": "Projektpakete",
+    "a11y.retainers": "Monatliche Betreuungspakete",
+    "a11y.previousPackage": "Vorheriges Paket",
+    "a11y.nextPackage": "Nächstes Paket",
+    "a11y.backToTop": "Zurück nach oben",
+    "a11y.required": "Dieses Feld ist erforderlich.",
+    "a11y.invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "service.automation.sequence": "E-Mail-Sequenzen",
     "packages.hoursExpiry": "Nicht genutzte Stunden verfallen am Ende des jeweiligen Abrechnungsmonats und werden nicht übertragen.",
     "packages.timeline.premium": "6–8 Wochen",
     "packages.timeline.business": "4–6 Wochen",
@@ -355,6 +381,11 @@ function applyLanguage(language, animate = true) {
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const value = translations[selected][element.dataset.i18n];
       if (value) element.textContent = value;
+    });
+
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+      const value = translations[selected][element.dataset.i18nAriaLabel];
+      if (value) element.setAttribute("aria-label", value);
     });
 
 
@@ -627,7 +658,7 @@ if(backToTopButton){
   const showAfter=760;
   const updateVisibility=()=>{
     clearTimeout(hideTimer);
-    if(window.scrollY>showAfter){backToTopButton.classList.add("is-visible");return;}
+    if(window.scrollY>showAfter){backToTopButton.classList.add("is-visible");if(!backToTopButton.dataset.pulsed){backToTopButton.dataset.pulsed="true";setTimeout(()=>backToTopButton.classList.add("has-pulsed"),1200);}return;}
     hideTimer=setTimeout(()=>backToTopButton.classList.remove("is-visible"),250);
   };
   const easeInOutCubic=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
@@ -807,6 +838,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+/* V12 — Accessibility and constellation polish */
+(() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const stars = [...document.querySelectorAll(".page-star")];
+
+  const updateConstellation = () => {
+    if (reduceMotion.matches) return;
+    const scrollY = window.scrollY;
+    stars.forEach((star, index) => {
+      const direction = index % 2 ? -1 : 1;
+      const speed = 0.018 + (index % 4) * 0.007;
+      star.style.setProperty("--scroll-shift", `${scrollY * speed * direction}px`);
+    });
+  };
+
+  let starFrame = 0;
+  window.addEventListener("scroll", () => {
+    if (starFrame) return;
+    starFrame = requestAnimationFrame(() => {
+      updateConstellation();
+      starFrame = 0;
+    });
+  }, { passive: true });
+  updateConstellation();
+
+  const form = document.getElementById("contact-form");
+  if (form) {
+    const requiredControls = [...form.querySelectorAll("[required]")];
+
+    const errorText = control => {
+      const lang = typeof currentLanguage === "function" ? currentLanguage() : "en";
+      if (control.type === "email" && control.value && !control.validity.valid) {
+        return translations[lang]["a11y.invalidEmail"];
+      }
+      if (!control.validity.valid) return translations[lang]["a11y.required"];
+      return "";
+    };
+
+    const syncValidity = control => {
+      const message = errorText(control);
+      control.setAttribute("aria-invalid", String(Boolean(message)));
+      const error = control.id ? document.getElementById(`${control.id}-error`) : null;
+      if (error) error.textContent = message;
+      return !message;
+    };
+
+    requiredControls.forEach(control => {
+      control.addEventListener("blur", () => syncValidity(control));
+      control.addEventListener("input", () => {
+        if (control.getAttribute("aria-invalid") === "true") syncValidity(control);
+      });
+      control.setAttribute("aria-invalid", "false");
+    });
+
+    form.addEventListener("submit", event => {
+      const invalid = requiredControls.filter(control => !syncValidity(control));
+      if (invalid.length) {
+        event.preventDefault();
+        invalid[0].focus();
+      }
+    }, true);
+  }
+
+  // Make hidden carousel cards unreachable by keyboard while preserving the active card.
+  document.querySelectorAll(".package-carousel").forEach(carousel => {
+    const cards = [...carousel.querySelectorAll(".package-card")];
+    const syncCardFocus = () => {
+      cards.forEach(card => {
+        const active = card.classList.contains("is-active");
+        card.querySelectorAll("a, button, input, select, textarea, [tabindex]").forEach(control => {
+          if (active) control.removeAttribute("tabindex");
+          else control.setAttribute("tabindex", "-1");
+        });
+      });
+    };
+    const observer = new MutationObserver(syncCardFocus);
+    cards.forEach(card => observer.observe(card, { attributes: true, attributeFilter: ["class"] }));
+    syncCardFocus();
+  });
+})();
 
 /* V11 — Optional offline shell */
 if ("serviceWorker" in navigator && location.protocol === "https:") {
