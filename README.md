@@ -98,7 +98,7 @@ Open `index.html` locally or deploy the folder as a static site.
 - Changed the navigation from sticky to truly fixed positioning so it remains visible throughout scrolling.
 - Adjusted divider navigation offsets to account for the pinned header.
 
-## v15.2 — Polaris + Editorial Sparkle
+## v15.3 — Polaris + Editorial Sparkle
 - Restores the small ✦ sparkle as a hover/focus micro-interaction on CTA buttons.
 - Keeps the bespoke Polaris mark as the primary brand symbol across the first-impression touchpoints.
 - Retains the fixed navigation and the refined Polaris constellation system from v15.1.

@@ -584,10 +584,12 @@ function animatePriceValue(element, target, currency, options = {}) {
   const { force = false } = options;
   const formattedTarget = formatPrice(target, currency);
 
-  if (reducePriceMotion.matches || (!force && element.dataset.priceAnimated === "true")) {
-    element.textContent = formattedTarget;
-    element.dataset.currentValue = String(target);
-    element.setAttribute("aria-label", formattedTarget);
+  element.textContent = formattedTarget;
+  element.dataset.currentValue = String(target);
+  element.setAttribute("aria-label", formattedTarget);
+
+  if (reducePriceMotion.matches || (!force && element.dataset.priceRevealed === "true")) {
+    element.dataset.priceRevealed = "true";
     return;
   }
 
@@ -595,17 +597,15 @@ function animatePriceValue(element, target, currency, options = {}) {
   if (previousTimer) window.clearTimeout(previousTimer);
 
   element.classList.remove("price-animating");
-  void element.offsetWidth;
-  element.classList.add("price-animating");
-  element.textContent = formattedTarget;
-  element.dataset.currentValue = String(target);
-  element.dataset.priceAnimated = "true";
-  element.setAttribute("aria-label", formattedTarget);
+  requestAnimationFrame(() => {
+    element.classList.add("price-animating");
+    element.dataset.priceRevealed = "true";
+  });
 
   const timer = window.setTimeout(() => {
     element.classList.remove("price-animating");
     priceAnimationTimers.delete(element);
-  }, 620);
+  }, 760);
 
   priceAnimationTimers.set(element, timer);
 }
@@ -613,16 +613,15 @@ function animatePriceValue(element, target, currency, options = {}) {
 function setCurrency(currency, animate = true) {
   priceValues.forEach((element) => {
     const value = Number(currency === "EUR" ? element.dataset.eur : element.dataset.usd);
-    element.dataset.priceAnimated = animate ? "false" : element.dataset.priceAnimated || "false";
-
     const card = element.closest(".package-card");
     const shouldAnimate = animate && (!card || card.classList.contains("is-active"));
 
     if (shouldAnimate) animatePriceValue(element, value, currency, { force: true });
     else {
-      element.textContent = formatPrice(value, currency);
+      const formatted = formatPrice(value, currency);
+      element.textContent = formatted;
       element.dataset.currentValue = String(value);
-      element.setAttribute("aria-label", formatPrice(value, currency));
+      element.setAttribute("aria-label", formatted);
     }
   });
 
@@ -641,32 +640,22 @@ currencyButtons.forEach((button) => {
 
 setCurrency(localStorage.getItem("lj-studio-currency") || "USD", false);
 
-/* Animate package prices when their cards become active or enter the viewport. */
-document.querySelectorAll(".package-card").forEach(card => {
-  const price = card.querySelector(".price-value");
-  if (!price) return;
-
-  const animateCardPrice = () => {
-    if (!card.classList.contains("is-active")) return;
-    const currency = localStorage.getItem("lj-studio-currency") || "USD";
-    const target = Number(currency === "EUR" ? price.dataset.eur : price.dataset.usd);
-    price.dataset.priceAnimated = "false";
-    animatePriceValue(price, target, currency, { force: true });
-  };
-
-  const classObserver = new MutationObserver(mutations => {
-    if (mutations.some(mutation => mutation.attributeName === "class")) {
-      animateCardPrice();
+/* Reveal each package price only once, when it genuinely enters view.
+   Carousel state changes no longer retrigger the animation. */
+const priceRevealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const price = entry.target.querySelector(".price-value");
+    if (price) {
+      const currency = localStorage.getItem("lj-studio-currency") || "USD";
+      const target = Number(currency === "EUR" ? price.dataset.eur : price.dataset.usd);
+      animatePriceValue(price, target, currency);
     }
+    observer.unobserve(entry.target);
   });
-  classObserver.observe(card, { attributes: true, attributeFilter: ["class"] });
+}, { threshold: .48, rootMargin: "0px 0px -8% 0px" });
 
-  const visibilityObserver = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    animateCardPrice();
-  }, { threshold: .58 });
-  visibilityObserver.observe(card);
-});
+document.querySelectorAll(".package-card").forEach((card) => priceRevealObserver.observe(card));
 
 /* LJ package carousel — V11 exact geometry */
 document.querySelectorAll(".package-carousel").forEach((carousel) => {
@@ -1152,6 +1141,50 @@ document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
   };
   setDynamicCta();
   document.querySelectorAll('.language-button').forEach(b => b.addEventListener('click', () => setTimeout(setDynamicCta, 0)));
+
+  const footerMessages = {
+    en: [
+      "Every great CRM starts with one conversation.",
+      "Built around people. Powered by systems.",
+      "Small studio. Meaningful transformation.",
+      "Find your Polaris. Build with clarity.",
+      "Good systems should feel effortless.",
+      "Clarity scales better than complexity.",
+      "Designed for relationships, not just pipelines.",
+      "Let’s build something remarkable together."
+    ],
+    de: [
+      "Jedes großartige CRM beginnt mit einem Gespräch.",
+      "Für Menschen gedacht. Durch Systeme gestärkt.",
+      "Kleines Studio. Nachhaltige Veränderung.",
+      "Finde deinen Polaris. Schaffe Klarheit.",
+      "Gute Systeme sollten sich mühelos anfühlen.",
+      "Klarheit skaliert besser als Komplexität.",
+      "Für Beziehungen gestaltet, nicht nur für Pipelines.",
+      "Lass uns gemeinsam etwas Besonderes aufbauen."
+    ]
+  };
+
+  const lastFooterIndex = Number(sessionStorage.getItem('lj-studio-footer-message-index'));
+  const messageCount = footerMessages.en.length;
+  const availableIndexes = Array.from({ length: messageCount }, (_, index) => index)
+    .filter(index => index !== lastFooterIndex || messageCount === 1);
+  const randomArray = new Uint32Array(1);
+  window.crypto?.getRandomValues?.(randomArray);
+  const randomValue = window.crypto?.getRandomValues ? randomArray[0] / 4294967296 : Math.random();
+  const footerMessageIndex = availableIndexes[Math.floor(randomValue * availableIndexes.length)];
+  sessionStorage.setItem('lj-studio-footer-message-index', String(footerMessageIndex));
+
+  const setFooterMessage = () => {
+    const el = document.querySelector('.footer-intention');
+    if (!el) return;
+    const lang = document.documentElement.lang === 'de' ? 'de' : 'en';
+    el.textContent = footerMessages[lang][footerMessageIndex];
+  };
+  setFooterMessage();
+  document.querySelectorAll('.language-button').forEach(button => {
+    button.addEventListener('click', () => window.setTimeout(setFooterMessage, 180));
+  });
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hero = document.querySelector('.hero');
