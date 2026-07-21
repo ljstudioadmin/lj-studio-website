@@ -3422,3 +3422,103 @@ body {
 @media (max-width: 560px) {
   .site-header { width:100%; padding-inline:13px; }
 }
+
+/* =========================================================
+   V15.1 — Complete Polaris system + truly pinned navigation
+   ========================================================= */
+:root { --header-height: 78px; }
+
+body { padding-top: var(--header-height); }
+.site-header {
+  position: fixed !important;
+  inset: 0 0 auto 0;
+  top: 0;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Replace the remaining generic sparkle glyphs with the custom Polaris mark. */
+.background-star,
+.page-star,
+.hero-orbit-star,
+.portfolio-star,
+.signature-star,
+.form-success-star,
+.back-to-top-star,
+.brand-closing > span,
+.premium-star,
+.retainer-premium::before,
+.retainer-premium::after,
+.star-cta::after {
+  color: transparent !important;
+  text-shadow: none !important;
+  font-size: 0 !important;
+  background: center / contain no-repeat url("assets/icons/polaris-mark.svg") !important;
+}
+
+.background-star,
+.page-star,
+.hero-orbit-star,
+.portfolio-star,
+.signature-star,
+.form-success-star,
+.back-to-top-star,
+.brand-closing > span,
+.premium-star {
+  display: inline-block;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* Distributed constellation marks retain visual hierarchy without reverting to Gemini-like glyphs. */
+.page-star-1 { width: 1.1rem; height: 1.1rem; }
+.page-star-2 { width: 1.45rem; height: 1.45rem; }
+.page-star-3 { width: 1.75rem; height: 1.75rem; }
+.page-star-4 { width: .95rem; height: .95rem; }
+.page-star-5 { width: 1.25rem; height: 1.25rem; }
+.page-star-6 { width: 1.05rem; height: 1.05rem; }
+.page-star-7 { width: 1.85rem; height: 1.85rem; }
+.page-star-8 { width: 1.3rem; height: 1.3rem; }
+
+.background-star { width: 1.1rem; height: 1.1rem; }
+.hero-orbit-star { width: .92rem; height: .92rem; opacity: .72; }
+.portfolio-star { width: 1.1rem; height: 1.1rem; }
+.signature-star { width: 1.2rem; height: 1.2rem; }
+.form-success-star { width: 2.7rem; height: 2.7rem; }
+.back-to-top-star { width: 1rem; height: 1rem; }
+.brand-closing > span { width: 1.55rem; height: 1.55rem; flex: 0 0 auto; }
+
+.star-cta::after {
+  content: "" !important;
+  width: .78rem;
+  height: .78rem;
+}
+
+/* Monthly Premium plan: one coherent mini constellation using the bespoke mark. */
+.premium-star {
+  width: .82rem;
+  height: .82rem;
+  opacity: .72;
+  filter: drop-shadow(0 0 8px rgba(200,167,90,.28));
+}
+.premium-star-b { width: .64rem; height: .64rem; opacity: .56; }
+.premium-star-c { width: .96rem; height: .96rem; }
+.premium-star-d { width: .5rem; height: .5rem; opacity: .48; }
+.premium-star-e { width: .7rem; height: .7rem; opacity: .58; }
+
+.retainer-premium::before,
+.retainer-premium::after {
+  content: "" !important;
+  width: 1.05rem;
+  height: 1.05rem;
+  filter: drop-shadow(0 0 10px rgba(200,167,90,.32));
+}
+.retainer-premium::after {
+  width: .76rem;
+  height: .76rem;
+  opacity: .62;
+}
+
+@media (max-width: 850px) {
+  :root { --header-height: 72px; }
+}

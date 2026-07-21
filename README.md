@@ -1,4 +1,4 @@
-# LJ Studio Website v15.0 — Polaris Identity
+# LJ Studio Website v15.1 — Complete Polaris Identity
 
 ## What changed
 - Midnight-blue brand palette
@@ -90,3 +90,10 @@ Open `index.html` locally or deploy the folder as a static site.
 - Internal navigation now aligns the decorative divider directly with the top edge of the viewport.
 - Sections without a preceding divider align their own section edge to the top.
 - The same positioning is applied when loading a page with a section hash.
+
+
+## v15.1 updates
+- Replaced remaining generic sparkle glyphs across the page with the custom Polaris mark.
+- Updated the monthly Premium retainer constellation and decorative stars.
+- Changed the navigation from sticky to truly fixed positioning so it remains visible throughout scrolling.
+- Adjusted divider navigation offsets to account for the pinned header.

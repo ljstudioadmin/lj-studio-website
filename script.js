@@ -1181,7 +1181,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const scrollSectionToTop = (section, updateHash = true) => {
     const anchor = getScrollAnchor(section);
-    const targetTop = Math.max(0, window.scrollY + anchor.getBoundingClientRect().top);
+    const header = document.querySelector(".site-header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const targetTop = Math.max(0, window.scrollY + anchor.getBoundingClientRect().top - headerHeight);
 
     window.scrollTo({
       top: targetTop,
