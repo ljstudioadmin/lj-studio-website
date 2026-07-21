@@ -1,3 +1,12 @@
+# LJ Studio Website v15.0 — Polaris Identity
+
+## What changed
+- Midnight-blue brand palette
+- Bespoke Polaris mark combining a directional north star, partial orbit and subtle constellation
+- Sticky translucent navigation with blur and a fine gold divider
+- Updated favicon and app icons
+- Existing divider-top navigation behavior preserved
+
 # LJ Studio v14.2 — Polaris Edition
 
 Boutique CRM and automation website with a constellation-led visual identity.

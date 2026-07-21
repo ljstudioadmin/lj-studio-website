@@ -137,7 +137,7 @@ const translations = {
     "form.message": "Tell me about your project",
     "form.messagePlaceholder": "What are you trying to improve, and what is currently getting in the way?",
     "form.consent": "I agree that LJ Studio may use my details to respond to this inquiry.",
-    "form.submit": "Send it my way",
+    "form.submit": "Let’s start the conversation",
     "form.note": "The form is ready for Formspree. Until an endpoint is added, it opens your email app with the message prefilled.",
     "form.invalid": "Please complete the required fields and enter a valid email address.",
     "form.sending": "Sending your message…",
@@ -364,7 +364,7 @@ const translations = {
     "form.message": "Erzähl mir von deinem Projekt",
     "form.messagePlaceholder": "Was möchtest du verbessern und was steht aktuell im Weg?",
     "form.consent": "Ich stimme zu, dass LJ Studio meine Angaben zur Beantwortung dieser Anfrage verwenden darf.",
-    "form.submit": "Schick es mir",
+    "form.submit": "Lass uns ins Gespräch kommen",
     "form.note": "Das Formular ist für Formspree vorbereitet. Bis ein Endpoint hinterlegt ist, öffnet es dein E-Mail-Programm mit der vorausgefüllten Nachricht.",
     "form.invalid": "Bitte fülle die Pflichtfelder aus und gib eine gültige E-Mail-Adresse ein.",
     "form.sending": "Nachricht wird gesendet…",
@@ -733,8 +733,20 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
     updateCarousel();
   }
 
-  previousButton?.addEventListener("click", () => move(-1));
-  nextButton?.addEventListener("click", () => move(1));
+  // Keep the arrow controls fully clickable even with drag support enabled.
+  [previousButton, nextButton].forEach((button) => {
+    button?.addEventListener("pointerdown", (event) => event.stopPropagation());
+  });
+  previousButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    move(-1);
+  });
+  nextButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    move(1);
+  });
 
   cards.forEach((card, index) => {
     card.addEventListener("click", (event) => {
@@ -767,7 +779,7 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
   viewport?.addEventListener("pointermove", (event) => {
     if (!isDragging || event.pointerId !== activePointerId) return;
     dragDeltaX = event.clientX - dragStartX;
-    if (Math.abs(dragDeltaX) > 5) didDrag = true;
+    if (Math.abs(dragDeltaX) > 12) didDrag = true;
     track.style.transform = `translate3d(${baseTranslate + dragDeltaX}px, 0, 0)`;
   });
 
@@ -778,7 +790,7 @@ document.querySelectorAll(".package-carousel").forEach((carousel) => {
     viewport.releasePointerCapture?.(event.pointerId);
     track.style.transition = "";
 
-    if (Math.abs(dragDeltaX) > 55) {
+    if (Math.abs(dragDeltaX) > 60) {
       move(dragDeltaX > 0 ? -1 : 1);
     } else {
       updateCarousel();
@@ -1153,3 +1165,47 @@ document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
     hero.addEventListener('pointerleave', () => layers.forEach(layer => layer.style.transform='translate3d(0,0,0)'));
   }
 })();
+
+
+/* V14.10 — align section dividers to the very top */
+document.addEventListener("DOMContentLoaded", () => {
+  const internalLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => {
+    const href = link.getAttribute("href");
+    return href && href.length > 1 && document.querySelector(href);
+  });
+
+  const getScrollAnchor = section => {
+    const previous = section.previousElementSibling;
+    return previous?.classList.contains("star-divider") ? previous : section;
+  };
+
+  const scrollSectionToTop = (section, updateHash = true) => {
+    const anchor = getScrollAnchor(section);
+    const targetTop = Math.max(0, window.scrollY + anchor.getBoundingClientRect().top);
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    });
+
+    if (updateHash) history.replaceState(null, "", `#${section.id}`);
+  };
+
+  internalLinks.forEach(link => {
+    link.addEventListener("click", event => {
+      const section = document.querySelector(link.getAttribute("href"));
+      if (!section) return;
+      event.preventDefault();
+      scrollSectionToTop(section);
+    });
+  });
+
+  if (location.hash) {
+    const initialSection = document.querySelector(location.hash);
+    if (initialSection) {
+      window.addEventListener("load", () => {
+        window.setTimeout(() => scrollSectionToTop(initialSection, false), 80);
+      }, { once: true });
+    }
+  }
+});

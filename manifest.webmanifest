@@ -4,8 +4,8 @@
   "description": "CRM, automation and growth infrastructure.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b1020",
-  "theme_color": "#0b1020",
+  "background_color": "#0d1730",
+  "theme_color": "#0d1730",
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",

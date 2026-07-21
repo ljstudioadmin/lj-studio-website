@@ -3365,3 +3365,60 @@ h2 { font-size: clamp(1.9rem, 3.55vw, 3.45rem); }
 }
 
 section[id] { scroll-margin-top: 0; }
+
+/* =========================================================
+   V15.0 — Polaris Identity
+   ========================================================= */
+:root {
+  --midnight: #0d1730;
+  --navy: #172440;
+  --navy-soft: #1d2b49;
+  --line: rgba(247,246,243,.13);
+}
+
+html { scroll-padding-top: 78px; }
+body {
+  background:
+    radial-gradient(circle at 72% -4%, rgba(95,70,216,.075), transparent 31rem),
+    radial-gradient(circle at 7% 17%, rgba(15,118,110,.075), transparent 34rem),
+    linear-gradient(180deg, #0d1730 0%, #0b1429 100%);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: none;
+  min-height: 78px;
+  margin: 0;
+  padding-inline: max(20px, calc((100vw - var(--max)) / 2));
+  z-index: 1000;
+  background: rgba(13,23,48,.82);
+  border-bottom: 1px solid rgba(200,167,90,.24);
+  box-shadow: 0 14px 36px rgba(3,8,20,.18);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+}
+
+.brand { min-width: max-content; }
+.brand-mark { display:inline-flex; align-items:flex-start; }
+.polaris-logo-mark { display:block; width:1em; height:1em; object-fit:contain; }
+.spark.polaris-logo-mark { width:.72em; height:.72em; margin:.02em 0 0 .12em; }
+.loading-mark .polaris-logo-mark { width:44px; height:44px; margin-right:10px; }
+.hero-signature-star .polaris-hero-mark { width:58%; height:58%; position:relative; z-index:2; filter:drop-shadow(0 0 18px rgba(200,167,90,.3)); animation:polaris-breathe 5.8s ease-in-out infinite; }
+.polaris-divider-mark { width:24px; height:24px; opacity:.94; filter:drop-shadow(0 0 10px rgba(200,167,90,.25)); }
+@keyframes polaris-breathe { 0%,100%{transform:scale(.92) rotate(-2deg);opacity:.76} 50%{transform:scale(1.04) rotate(2deg);opacity:1} }
+
+/* Make the new mark the visual signature while reducing generic sparkle prominence. */
+.brand-stars, .page-constellation { opacity:.58; }
+.background-star { opacity:.014; }
+.hero-signature-star span { display:none; }
+.star-divider span { display:none; }
+
+@media (max-width: 850px) {
+  .site-header { min-height:72px; padding-inline:18px; }
+  .main-nav { top:72px; right:18px; background:rgba(13,23,48,.97); }
+}
+@media (max-width: 560px) {
+  .site-header { width:100%; padding-inline:13px; }
+}
