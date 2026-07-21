@@ -3448,8 +3448,7 @@ body { padding-top: var(--header-height); }
 .brand-closing > span,
 .premium-star,
 .retainer-premium::before,
-.retainer-premium::after,
-.star-cta::after {
+.retainer-premium::after {
   color: transparent !important;
   text-shadow: none !important;
   font-size: 0 !important;
@@ -3488,10 +3487,28 @@ body { padding-top: var(--header-height); }
 .back-to-top-star { width: 1rem; height: 1rem; }
 .brand-closing > span { width: 1.55rem; height: 1.55rem; flex: 0 0 auto; }
 
+/* Editorial sparkle: a micro-interaction, not the primary brand mark. */
 .star-cta::after {
-  content: "" !important;
-  width: .78rem;
-  height: .78rem;
+  content: "✦" !important;
+  display: inline-block;
+  width: 0;
+  height: auto;
+  margin-left: 0;
+  opacity: 0;
+  color: var(--gold) !important;
+  background: none !important;
+  font-size: .9rem !important;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(200, 167, 90, .28) !important;
+  transform: translateX(-5px) rotate(-22deg) scale(.8);
+  transition: width .24s ease, margin-left .24s ease, opacity .24s ease, transform .3s ease;
+}
+.star-cta:hover::after,
+.star-cta:focus-visible::after {
+  width: 1em;
+  margin-left: 10px;
+  opacity: 1;
+  transform: translateX(0) rotate(0) scale(1);
 }
 
 /* Monthly Premium plan: one coherent mini constellation using the bespoke mark. */
